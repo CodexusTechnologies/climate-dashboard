@@ -12,9 +12,9 @@
 - 📱 **Fully Responsive** - Works seamlessly on mobile, tablet, and desktop
 - 🎨 **Modern UI** - Glassmorphism design with smooth animations
 - 🌍 **Regional Analysis** - View climate data by different provinces
-- 🔮 **5-Day Forecast** - Weather predictions and trends
-- ⚡ **High Performance** - Built with React + Vite for blazing fast load times
-- ♿ **Accessible** - WCAG compliant interface
+- ☀️ **5-Day Forecast** - Weather predictions and trends
+- 📈 **High Performance** - Built with React + Vite for blazing fast load times
+- 🤝 **Accessible** - WCAG compliant interface
 
 ## Tech Stack 🛠️
 
