@@ -1,27 +1,35 @@
-import React from 'react'
-import ChartCard from './ChartCard'
+import { FC } from 'react';
+import { ForecastData } from '../types';
+import { Sun, Cloud, CloudRain } from 'lucide-react';
 
-
-export default function ForecastCard(){
-// static 5-day mock forecast
-const forecast = [
-{ day: 'Today', temp: 29, rain: 20 },
-{ day: 'Tomorrow', temp: 30, rain: 10 },
-{ day: 'Day 3', temp: 28, rain: 60 },
-{ day: 'Day 4', temp: 27, rain: 40 },
-{ day: 'Day 5', temp: 29, rain: 15 }
-]
-return (
-<ChartCard title="5-Day Forecast" subtitle="Simple precipitation & temperature forecast">
-<div className="flex gap-3 items-stretch h-full pt-2">
-{forecast.map(f => (
-<div key={f.day} className="flex-1 flex flex-col items-center justify-center glass rounded-lg p-3">
-<div className="text-sm font-medium">{f.day}</div>
-<div className="text-2xl font-semibold mt-2">{f.temp}°C</div>
-<div className="text-xs text-slate-300 mt-1">Rain: {f.rain}%</div>
-</div>
-))}
-</div>
-</ChartCard>
-)
+interface ForecastCardProps {
+  forecast: ForecastData[];
 }
+
+const ForecastCard: FC<ForecastCardProps> = ({ forecast }) => {
+  const getWeatherIcon = (temp: number, rainfall: number) => {
+    if (rainfall > 150) return <CloudRain className="w-8 h-8 text-blue-500" />;
+    if (temp > 28) return <Sun className="w-8 h-8 text-yellow-500" />;
+    return <Cloud className="w-8 h-8 text-gray-500" />;
+  };
+
+  return (
+    <div className="glass-morphism rounded-lg p-6">
+      <h2 className="text-xl font-semibold mb-4">5-Day Forecast</h2>
+      <div className="grid grid-cols-5 gap-4">
+        {forecast.map((day) => (
+          <div key={day.date} className="text-center">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}
+            </p>
+            {getWeatherIcon(day.temperature, day.rainfall)}
+            <p className="text-lg font-semibold mt-2">{day.temperature}°C</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{day.rainfall}mm</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ForecastCard;
